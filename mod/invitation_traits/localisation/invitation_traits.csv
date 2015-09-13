@@ -1,0 +1,8 @@
+#CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
+
+# Decisions
+recompute_invitation_traits_decision;Recompute invitation traits;;;;;;;;;x
+recompute_invitation_traits_decision_desc;Update invitation traits for all characters, immediately. (Normally happens yearly.);;;;;;;;;;;;;x
+recompute_invitation_traits_decision.tooltip;This will take a few seconds.;;;;;;;;;;;;;x
+
+# Traits

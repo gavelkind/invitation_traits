@@ -1,0 +1,552 @@
+namespace = InvitationTraits
+
+
+character_event = {
+    id = InvitationTraits.1
+
+    is_triggered_only = yes
+
+    hide_window = yes
+
+    trigger = {
+        is_adult = yes
+        is_alive = yes
+    }
+
+    immediate = {
+
+        # Remove old traits
+        remove_trait = accept_invite
+        remove_trait = bribe_invite
+        remove_trait = reject_invite
+
+        # If there's a simple blocker, don't even show a trait
+        if = {
+            limit = {
+                OR = {
+                    # Cannot accept invitations
+                    is_ruler = yes
+                    prisoner = yes
+                    any_spouse = { is_ruler = yes }  # technically men married to female rulers can move, but i think this is a bug
+                    is_concubine = yes
+                    is_married_matrilineally = yes
+                    AND = { is_female = yes  is_married = yes }
+                    is_abroad = yes
+
+                    # Already in player's court
+                    liege = { ai = no }
+
+                    # No player could possibly invite me
+                    NOT = {
+                        any_playable_ruler = {
+                            ai = no
+                            religion_group = ROOT
+                            is_within_diplo_range = ROOT
+                        }
+                    }
+                }
+            }
+            break = yes
+        }
+
+
+        # OPINION OF LIEGE
+
+        #   for i in range (-100, 100):
+        #       print "        if { limit = { opinion = { who = liege value = %d } }  set_variable = { which = invite_c_liege value = %d } }" % (
+        #           i,
+        #           -(i * 2 if i > 0 else i // 2)
+        #       )
+
+        if { limit = { opinion = { who = liege value = -100 } }  set_variable = { which = invite_c_liege value = 50 } }
+        if { limit = { opinion = { who = liege value = -99 } }  set_variable = { which = invite_c_liege value = 50 } }
+        if { limit = { opinion = { who = liege value = -98 } }  set_variable = { which = invite_c_liege value = 49 } }
+        if { limit = { opinion = { who = liege value = -97 } }  set_variable = { which = invite_c_liege value = 49 } }
+        if { limit = { opinion = { who = liege value = -96 } }  set_variable = { which = invite_c_liege value = 48 } }
+        if { limit = { opinion = { who = liege value = -95 } }  set_variable = { which = invite_c_liege value = 48 } }
+        if { limit = { opinion = { who = liege value = -94 } }  set_variable = { which = invite_c_liege value = 47 } }
+        if { limit = { opinion = { who = liege value = -93 } }  set_variable = { which = invite_c_liege value = 47 } }
+        if { limit = { opinion = { who = liege value = -92 } }  set_variable = { which = invite_c_liege value = 46 } }
+        if { limit = { opinion = { who = liege value = -91 } }  set_variable = { which = invite_c_liege value = 46 } }
+        if { limit = { opinion = { who = liege value = -90 } }  set_variable = { which = invite_c_liege value = 45 } }
+        if { limit = { opinion = { who = liege value = -89 } }  set_variable = { which = invite_c_liege value = 45 } }
+        if { limit = { opinion = { who = liege value = -88 } }  set_variable = { which = invite_c_liege value = 44 } }
+        if { limit = { opinion = { who = liege value = -87 } }  set_variable = { which = invite_c_liege value = 44 } }
+        if { limit = { opinion = { who = liege value = -86 } }  set_variable = { which = invite_c_liege value = 43 } }
+        if { limit = { opinion = { who = liege value = -85 } }  set_variable = { which = invite_c_liege value = 43 } }
+        if { limit = { opinion = { who = liege value = -84 } }  set_variable = { which = invite_c_liege value = 42 } }
+        if { limit = { opinion = { who = liege value = -83 } }  set_variable = { which = invite_c_liege value = 42 } }
+        if { limit = { opinion = { who = liege value = -82 } }  set_variable = { which = invite_c_liege value = 41 } }
+        if { limit = { opinion = { who = liege value = -81 } }  set_variable = { which = invite_c_liege value = 41 } }
+        if { limit = { opinion = { who = liege value = -80 } }  set_variable = { which = invite_c_liege value = 40 } }
+        if { limit = { opinion = { who = liege value = -79 } }  set_variable = { which = invite_c_liege value = 40 } }
+        if { limit = { opinion = { who = liege value = -78 } }  set_variable = { which = invite_c_liege value = 39 } }
+        if { limit = { opinion = { who = liege value = -77 } }  set_variable = { which = invite_c_liege value = 39 } }
+        if { limit = { opinion = { who = liege value = -76 } }  set_variable = { which = invite_c_liege value = 38 } }
+        if { limit = { opinion = { who = liege value = -75 } }  set_variable = { which = invite_c_liege value = 38 } }
+        if { limit = { opinion = { who = liege value = -74 } }  set_variable = { which = invite_c_liege value = 37 } }
+        if { limit = { opinion = { who = liege value = -73 } }  set_variable = { which = invite_c_liege value = 37 } }
+        if { limit = { opinion = { who = liege value = -72 } }  set_variable = { which = invite_c_liege value = 36 } }
+        if { limit = { opinion = { who = liege value = -71 } }  set_variable = { which = invite_c_liege value = 36 } }
+        if { limit = { opinion = { who = liege value = -70 } }  set_variable = { which = invite_c_liege value = 35 } }
+        if { limit = { opinion = { who = liege value = -69 } }  set_variable = { which = invite_c_liege value = 35 } }
+        if { limit = { opinion = { who = liege value = -68 } }  set_variable = { which = invite_c_liege value = 34 } }
+        if { limit = { opinion = { who = liege value = -67 } }  set_variable = { which = invite_c_liege value = 34 } }
+        if { limit = { opinion = { who = liege value = -66 } }  set_variable = { which = invite_c_liege value = 33 } }
+        if { limit = { opinion = { who = liege value = -65 } }  set_variable = { which = invite_c_liege value = 33 } }
+        if { limit = { opinion = { who = liege value = -64 } }  set_variable = { which = invite_c_liege value = 32 } }
+        if { limit = { opinion = { who = liege value = -63 } }  set_variable = { which = invite_c_liege value = 32 } }
+        if { limit = { opinion = { who = liege value = -62 } }  set_variable = { which = invite_c_liege value = 31 } }
+        if { limit = { opinion = { who = liege value = -61 } }  set_variable = { which = invite_c_liege value = 31 } }
+        if { limit = { opinion = { who = liege value = -60 } }  set_variable = { which = invite_c_liege value = 30 } }
+        if { limit = { opinion = { who = liege value = -59 } }  set_variable = { which = invite_c_liege value = 30 } }
+        if { limit = { opinion = { who = liege value = -58 } }  set_variable = { which = invite_c_liege value = 29 } }
+        if { limit = { opinion = { who = liege value = -57 } }  set_variable = { which = invite_c_liege value = 29 } }
+        if { limit = { opinion = { who = liege value = -56 } }  set_variable = { which = invite_c_liege value = 28 } }
+        if { limit = { opinion = { who = liege value = -55 } }  set_variable = { which = invite_c_liege value = 28 } }
+        if { limit = { opinion = { who = liege value = -54 } }  set_variable = { which = invite_c_liege value = 27 } }
+        if { limit = { opinion = { who = liege value = -53 } }  set_variable = { which = invite_c_liege value = 27 } }
+        if { limit = { opinion = { who = liege value = -52 } }  set_variable = { which = invite_c_liege value = 26 } }
+        if { limit = { opinion = { who = liege value = -51 } }  set_variable = { which = invite_c_liege value = 26 } }
+        if { limit = { opinion = { who = liege value = -50 } }  set_variable = { which = invite_c_liege value = 25 } }
+        if { limit = { opinion = { who = liege value = -49 } }  set_variable = { which = invite_c_liege value = 25 } }
+        if { limit = { opinion = { who = liege value = -48 } }  set_variable = { which = invite_c_liege value = 24 } }
+        if { limit = { opinion = { who = liege value = -47 } }  set_variable = { which = invite_c_liege value = 24 } }
+        if { limit = { opinion = { who = liege value = -46 } }  set_variable = { which = invite_c_liege value = 23 } }
+        if { limit = { opinion = { who = liege value = -45 } }  set_variable = { which = invite_c_liege value = 23 } }
+        if { limit = { opinion = { who = liege value = -44 } }  set_variable = { which = invite_c_liege value = 22 } }
+        if { limit = { opinion = { who = liege value = -43 } }  set_variable = { which = invite_c_liege value = 22 } }
+        if { limit = { opinion = { who = liege value = -42 } }  set_variable = { which = invite_c_liege value = 21 } }
+        if { limit = { opinion = { who = liege value = -41 } }  set_variable = { which = invite_c_liege value = 21 } }
+        if { limit = { opinion = { who = liege value = -40 } }  set_variable = { which = invite_c_liege value = 20 } }
+        if { limit = { opinion = { who = liege value = -39 } }  set_variable = { which = invite_c_liege value = 20 } }
+        if { limit = { opinion = { who = liege value = -38 } }  set_variable = { which = invite_c_liege value = 19 } }
+        if { limit = { opinion = { who = liege value = -37 } }  set_variable = { which = invite_c_liege value = 19 } }
+        if { limit = { opinion = { who = liege value = -36 } }  set_variable = { which = invite_c_liege value = 18 } }
+        if { limit = { opinion = { who = liege value = -35 } }  set_variable = { which = invite_c_liege value = 18 } }
+        if { limit = { opinion = { who = liege value = -34 } }  set_variable = { which = invite_c_liege value = 17 } }
+        if { limit = { opinion = { who = liege value = -33 } }  set_variable = { which = invite_c_liege value = 17 } }
+        if { limit = { opinion = { who = liege value = -32 } }  set_variable = { which = invite_c_liege value = 16 } }
+        if { limit = { opinion = { who = liege value = -31 } }  set_variable = { which = invite_c_liege value = 16 } }
+        if { limit = { opinion = { who = liege value = -30 } }  set_variable = { which = invite_c_liege value = 15 } }
+        if { limit = { opinion = { who = liege value = -29 } }  set_variable = { which = invite_c_liege value = 15 } }
+        if { limit = { opinion = { who = liege value = -28 } }  set_variable = { which = invite_c_liege value = 14 } }
+        if { limit = { opinion = { who = liege value = -27 } }  set_variable = { which = invite_c_liege value = 14 } }
+        if { limit = { opinion = { who = liege value = -26 } }  set_variable = { which = invite_c_liege value = 13 } }
+        if { limit = { opinion = { who = liege value = -25 } }  set_variable = { which = invite_c_liege value = 13 } }
+        if { limit = { opinion = { who = liege value = -24 } }  set_variable = { which = invite_c_liege value = 12 } }
+        if { limit = { opinion = { who = liege value = -23 } }  set_variable = { which = invite_c_liege value = 12 } }
+        if { limit = { opinion = { who = liege value = -22 } }  set_variable = { which = invite_c_liege value = 11 } }
+        if { limit = { opinion = { who = liege value = -21 } }  set_variable = { which = invite_c_liege value = 11 } }
+        if { limit = { opinion = { who = liege value = -20 } }  set_variable = { which = invite_c_liege value = 10 } }
+        if { limit = { opinion = { who = liege value = -19 } }  set_variable = { which = invite_c_liege value = 10 } }
+        if { limit = { opinion = { who = liege value = -18 } }  set_variable = { which = invite_c_liege value = 9 } }
+        if { limit = { opinion = { who = liege value = -17 } }  set_variable = { which = invite_c_liege value = 9 } }
+        if { limit = { opinion = { who = liege value = -16 } }  set_variable = { which = invite_c_liege value = 8 } }
+        if { limit = { opinion = { who = liege value = -15 } }  set_variable = { which = invite_c_liege value = 8 } }
+        if { limit = { opinion = { who = liege value = -14 } }  set_variable = { which = invite_c_liege value = 7 } }
+        if { limit = { opinion = { who = liege value = -13 } }  set_variable = { which = invite_c_liege value = 7 } }
+        if { limit = { opinion = { who = liege value = -12 } }  set_variable = { which = invite_c_liege value = 6 } }
+        if { limit = { opinion = { who = liege value = -11 } }  set_variable = { which = invite_c_liege value = 6 } }
+        if { limit = { opinion = { who = liege value = -10 } }  set_variable = { which = invite_c_liege value = 5 } }
+        if { limit = { opinion = { who = liege value = -9 } }  set_variable = { which = invite_c_liege value = 5 } }
+        if { limit = { opinion = { who = liege value = -8 } }  set_variable = { which = invite_c_liege value = 4 } }
+        if { limit = { opinion = { who = liege value = -7 } }  set_variable = { which = invite_c_liege value = 4 } }
+        if { limit = { opinion = { who = liege value = -6 } }  set_variable = { which = invite_c_liege value = 3 } }
+        if { limit = { opinion = { who = liege value = -5 } }  set_variable = { which = invite_c_liege value = 3 } }
+        if { limit = { opinion = { who = liege value = -4 } }  set_variable = { which = invite_c_liege value = 2 } }
+        if { limit = { opinion = { who = liege value = -3 } }  set_variable = { which = invite_c_liege value = 2 } }
+        if { limit = { opinion = { who = liege value = -2 } }  set_variable = { which = invite_c_liege value = 1 } }
+        if { limit = { opinion = { who = liege value = -1 } }  set_variable = { which = invite_c_liege value = 1 } }
+        if { limit = { opinion = { who = liege value = 0 } }  set_variable = { which = invite_c_liege value = 0 } }
+        if { limit = { opinion = { who = liege value = 1 } }  set_variable = { which = invite_c_liege value = -2 } }
+        if { limit = { opinion = { who = liege value = 2 } }  set_variable = { which = invite_c_liege value = -4 } }
+        if { limit = { opinion = { who = liege value = 3 } }  set_variable = { which = invite_c_liege value = -6 } }
+        if { limit = { opinion = { who = liege value = 4 } }  set_variable = { which = invite_c_liege value = -8 } }
+        if { limit = { opinion = { who = liege value = 5 } }  set_variable = { which = invite_c_liege value = -10 } }
+        if { limit = { opinion = { who = liege value = 6 } }  set_variable = { which = invite_c_liege value = -12 } }
+        if { limit = { opinion = { who = liege value = 7 } }  set_variable = { which = invite_c_liege value = -14 } }
+        if { limit = { opinion = { who = liege value = 8 } }  set_variable = { which = invite_c_liege value = -16 } }
+        if { limit = { opinion = { who = liege value = 9 } }  set_variable = { which = invite_c_liege value = -18 } }
+        if { limit = { opinion = { who = liege value = 10 } }  set_variable = { which = invite_c_liege value = -20 } }
+        if { limit = { opinion = { who = liege value = 11 } }  set_variable = { which = invite_c_liege value = -22 } }
+        if { limit = { opinion = { who = liege value = 12 } }  set_variable = { which = invite_c_liege value = -24 } }
+        if { limit = { opinion = { who = liege value = 13 } }  set_variable = { which = invite_c_liege value = -26 } }
+        if { limit = { opinion = { who = liege value = 14 } }  set_variable = { which = invite_c_liege value = -28 } }
+        if { limit = { opinion = { who = liege value = 15 } }  set_variable = { which = invite_c_liege value = -30 } }
+        if { limit = { opinion = { who = liege value = 16 } }  set_variable = { which = invite_c_liege value = -32 } }
+        if { limit = { opinion = { who = liege value = 17 } }  set_variable = { which = invite_c_liege value = -34 } }
+        if { limit = { opinion = { who = liege value = 18 } }  set_variable = { which = invite_c_liege value = -36 } }
+        if { limit = { opinion = { who = liege value = 19 } }  set_variable = { which = invite_c_liege value = -38 } }
+        if { limit = { opinion = { who = liege value = 20 } }  set_variable = { which = invite_c_liege value = -40 } }
+        if { limit = { opinion = { who = liege value = 21 } }  set_variable = { which = invite_c_liege value = -42 } }
+        if { limit = { opinion = { who = liege value = 22 } }  set_variable = { which = invite_c_liege value = -44 } }
+        if { limit = { opinion = { who = liege value = 23 } }  set_variable = { which = invite_c_liege value = -46 } }
+        if { limit = { opinion = { who = liege value = 24 } }  set_variable = { which = invite_c_liege value = -48 } }
+        if { limit = { opinion = { who = liege value = 25 } }  set_variable = { which = invite_c_liege value = -50 } }
+        if { limit = { opinion = { who = liege value = 26 } }  set_variable = { which = invite_c_liege value = -52 } }
+        if { limit = { opinion = { who = liege value = 27 } }  set_variable = { which = invite_c_liege value = -54 } }
+        if { limit = { opinion = { who = liege value = 28 } }  set_variable = { which = invite_c_liege value = -56 } }
+        if { limit = { opinion = { who = liege value = 29 } }  set_variable = { which = invite_c_liege value = -58 } }
+        if { limit = { opinion = { who = liege value = 30 } }  set_variable = { which = invite_c_liege value = -60 } }
+        if { limit = { opinion = { who = liege value = 31 } }  set_variable = { which = invite_c_liege value = -62 } }
+        if { limit = { opinion = { who = liege value = 32 } }  set_variable = { which = invite_c_liege value = -64 } }
+        if { limit = { opinion = { who = liege value = 33 } }  set_variable = { which = invite_c_liege value = -66 } }
+        if { limit = { opinion = { who = liege value = 34 } }  set_variable = { which = invite_c_liege value = -68 } }
+        if { limit = { opinion = { who = liege value = 35 } }  set_variable = { which = invite_c_liege value = -70 } }
+        if { limit = { opinion = { who = liege value = 36 } }  set_variable = { which = invite_c_liege value = -72 } }
+        if { limit = { opinion = { who = liege value = 37 } }  set_variable = { which = invite_c_liege value = -74 } }
+        if { limit = { opinion = { who = liege value = 38 } }  set_variable = { which = invite_c_liege value = -76 } }
+        if { limit = { opinion = { who = liege value = 39 } }  set_variable = { which = invite_c_liege value = -78 } }
+        if { limit = { opinion = { who = liege value = 40 } }  set_variable = { which = invite_c_liege value = -80 } }
+        if { limit = { opinion = { who = liege value = 41 } }  set_variable = { which = invite_c_liege value = -82 } }
+        if { limit = { opinion = { who = liege value = 42 } }  set_variable = { which = invite_c_liege value = -84 } }
+        if { limit = { opinion = { who = liege value = 43 } }  set_variable = { which = invite_c_liege value = -86 } }
+        if { limit = { opinion = { who = liege value = 44 } }  set_variable = { which = invite_c_liege value = -88 } }
+        if { limit = { opinion = { who = liege value = 45 } }  set_variable = { which = invite_c_liege value = -90 } }
+        if { limit = { opinion = { who = liege value = 46 } }  set_variable = { which = invite_c_liege value = -92 } }
+        if { limit = { opinion = { who = liege value = 47 } }  set_variable = { which = invite_c_liege value = -94 } }
+        if { limit = { opinion = { who = liege value = 48 } }  set_variable = { which = invite_c_liege value = -96 } }
+        if { limit = { opinion = { who = liege value = 49 } }  set_variable = { which = invite_c_liege value = -98 } }
+        if { limit = { opinion = { who = liege value = 50 } }  set_variable = { which = invite_c_liege value = -100 } }
+        if { limit = { opinion = { who = liege value = 51 } }  set_variable = { which = invite_c_liege value = -102 } }
+        if { limit = { opinion = { who = liege value = 52 } }  set_variable = { which = invite_c_liege value = -104 } }
+        if { limit = { opinion = { who = liege value = 53 } }  set_variable = { which = invite_c_liege value = -106 } }
+        if { limit = { opinion = { who = liege value = 54 } }  set_variable = { which = invite_c_liege value = -108 } }
+        if { limit = { opinion = { who = liege value = 55 } }  set_variable = { which = invite_c_liege value = -110 } }
+        if { limit = { opinion = { who = liege value = 56 } }  set_variable = { which = invite_c_liege value = -112 } }
+        if { limit = { opinion = { who = liege value = 57 } }  set_variable = { which = invite_c_liege value = -114 } }
+        if { limit = { opinion = { who = liege value = 58 } }  set_variable = { which = invite_c_liege value = -116 } }
+        if { limit = { opinion = { who = liege value = 59 } }  set_variable = { which = invite_c_liege value = -118 } }
+        if { limit = { opinion = { who = liege value = 60 } }  set_variable = { which = invite_c_liege value = -120 } }
+        if { limit = { opinion = { who = liege value = 61 } }  set_variable = { which = invite_c_liege value = -122 } }
+        if { limit = { opinion = { who = liege value = 62 } }  set_variable = { which = invite_c_liege value = -124 } }
+        if { limit = { opinion = { who = liege value = 63 } }  set_variable = { which = invite_c_liege value = -126 } }
+        if { limit = { opinion = { who = liege value = 64 } }  set_variable = { which = invite_c_liege value = -128 } }
+        if { limit = { opinion = { who = liege value = 65 } }  set_variable = { which = invite_c_liege value = -130 } }
+        if { limit = { opinion = { who = liege value = 66 } }  set_variable = { which = invite_c_liege value = -132 } }
+        if { limit = { opinion = { who = liege value = 67 } }  set_variable = { which = invite_c_liege value = -134 } }
+        if { limit = { opinion = { who = liege value = 68 } }  set_variable = { which = invite_c_liege value = -136 } }
+        if { limit = { opinion = { who = liege value = 69 } }  set_variable = { which = invite_c_liege value = -138 } }
+        if { limit = { opinion = { who = liege value = 70 } }  set_variable = { which = invite_c_liege value = -140 } }
+        if { limit = { opinion = { who = liege value = 71 } }  set_variable = { which = invite_c_liege value = -142 } }
+        if { limit = { opinion = { who = liege value = 72 } }  set_variable = { which = invite_c_liege value = -144 } }
+        if { limit = { opinion = { who = liege value = 73 } }  set_variable = { which = invite_c_liege value = -146 } }
+        if { limit = { opinion = { who = liege value = 74 } }  set_variable = { which = invite_c_liege value = -148 } }
+        if { limit = { opinion = { who = liege value = 75 } }  set_variable = { which = invite_c_liege value = -150 } }
+        if { limit = { opinion = { who = liege value = 76 } }  set_variable = { which = invite_c_liege value = -152 } }
+        if { limit = { opinion = { who = liege value = 77 } }  set_variable = { which = invite_c_liege value = -154 } }
+        if { limit = { opinion = { who = liege value = 78 } }  set_variable = { which = invite_c_liege value = -156 } }
+        if { limit = { opinion = { who = liege value = 79 } }  set_variable = { which = invite_c_liege value = -158 } }
+        if { limit = { opinion = { who = liege value = 80 } }  set_variable = { which = invite_c_liege value = -160 } }
+        if { limit = { opinion = { who = liege value = 81 } }  set_variable = { which = invite_c_liege value = -162 } }
+        if { limit = { opinion = { who = liege value = 82 } }  set_variable = { which = invite_c_liege value = -164 } }
+        if { limit = { opinion = { who = liege value = 83 } }  set_variable = { which = invite_c_liege value = -166 } }
+        if { limit = { opinion = { who = liege value = 84 } }  set_variable = { which = invite_c_liege value = -168 } }
+        if { limit = { opinion = { who = liege value = 85 } }  set_variable = { which = invite_c_liege value = -170 } }
+        if { limit = { opinion = { who = liege value = 86 } }  set_variable = { which = invite_c_liege value = -172 } }
+        if { limit = { opinion = { who = liege value = 87 } }  set_variable = { which = invite_c_liege value = -174 } }
+        if { limit = { opinion = { who = liege value = 88 } }  set_variable = { which = invite_c_liege value = -176 } }
+        if { limit = { opinion = { who = liege value = 89 } }  set_variable = { which = invite_c_liege value = -178 } }
+        if { limit = { opinion = { who = liege value = 90 } }  set_variable = { which = invite_c_liege value = -180 } }
+        if { limit = { opinion = { who = liege value = 91 } }  set_variable = { which = invite_c_liege value = -182 } }
+        if { limit = { opinion = { who = liege value = 92 } }  set_variable = { which = invite_c_liege value = -184 } }
+        if { limit = { opinion = { who = liege value = 93 } }  set_variable = { which = invite_c_liege value = -186 } }
+        if { limit = { opinion = { who = liege value = 94 } }  set_variable = { which = invite_c_liege value = -188 } }
+        if { limit = { opinion = { who = liege value = 95 } }  set_variable = { which = invite_c_liege value = -190 } }
+        if { limit = { opinion = { who = liege value = 96 } }  set_variable = { which = invite_c_liege value = -192 } }
+        if { limit = { opinion = { who = liege value = 97 } }  set_variable = { which = invite_c_liege value = -194 } }
+        if { limit = { opinion = { who = liege value = 98 } }  set_variable = { which = invite_c_liege value = -196 } }
+        if { limit = { opinion = { who = liege value = 99 } }  set_variable = { which = invite_c_liege value = -198 } }
+
+
+        # OPINION OF PLAYER
+
+        any_playable_ruler = {
+            limit = { ai = no }
+            ROOT = {
+                #   for i in range (-100, 100):
+                #       print "                if { limit = { opinion = { who = PREV value = %d } }  set_variable = { which = invite_c_player value = %d } }" % (
+                #           i,
+                #           i  # ?
+                #       )
+
+                if { limit = { opinion = { who = PREV value = -100 } }  set_variable = { which = invite_c_player value = -100 } }
+                if { limit = { opinion = { who = PREV value = -99 } }  set_variable = { which = invite_c_player value = -99 } }
+                if { limit = { opinion = { who = PREV value = -98 } }  set_variable = { which = invite_c_player value = -98 } }
+                if { limit = { opinion = { who = PREV value = -97 } }  set_variable = { which = invite_c_player value = -97 } }
+                if { limit = { opinion = { who = PREV value = -96 } }  set_variable = { which = invite_c_player value = -96 } }
+                if { limit = { opinion = { who = PREV value = -95 } }  set_variable = { which = invite_c_player value = -95 } }
+                if { limit = { opinion = { who = PREV value = -94 } }  set_variable = { which = invite_c_player value = -94 } }
+                if { limit = { opinion = { who = PREV value = -93 } }  set_variable = { which = invite_c_player value = -93 } }
+                if { limit = { opinion = { who = PREV value = -92 } }  set_variable = { which = invite_c_player value = -92 } }
+                if { limit = { opinion = { who = PREV value = -91 } }  set_variable = { which = invite_c_player value = -91 } }
+                if { limit = { opinion = { who = PREV value = -90 } }  set_variable = { which = invite_c_player value = -90 } }
+                if { limit = { opinion = { who = PREV value = -89 } }  set_variable = { which = invite_c_player value = -89 } }
+                if { limit = { opinion = { who = PREV value = -88 } }  set_variable = { which = invite_c_player value = -88 } }
+                if { limit = { opinion = { who = PREV value = -87 } }  set_variable = { which = invite_c_player value = -87 } }
+                if { limit = { opinion = { who = PREV value = -86 } }  set_variable = { which = invite_c_player value = -86 } }
+                if { limit = { opinion = { who = PREV value = -85 } }  set_variable = { which = invite_c_player value = -85 } }
+                if { limit = { opinion = { who = PREV value = -84 } }  set_variable = { which = invite_c_player value = -84 } }
+                if { limit = { opinion = { who = PREV value = -83 } }  set_variable = { which = invite_c_player value = -83 } }
+                if { limit = { opinion = { who = PREV value = -82 } }  set_variable = { which = invite_c_player value = -82 } }
+                if { limit = { opinion = { who = PREV value = -81 } }  set_variable = { which = invite_c_player value = -81 } }
+                if { limit = { opinion = { who = PREV value = -80 } }  set_variable = { which = invite_c_player value = -80 } }
+                if { limit = { opinion = { who = PREV value = -79 } }  set_variable = { which = invite_c_player value = -79 } }
+                if { limit = { opinion = { who = PREV value = -78 } }  set_variable = { which = invite_c_player value = -78 } }
+                if { limit = { opinion = { who = PREV value = -77 } }  set_variable = { which = invite_c_player value = -77 } }
+                if { limit = { opinion = { who = PREV value = -76 } }  set_variable = { which = invite_c_player value = -76 } }
+                if { limit = { opinion = { who = PREV value = -75 } }  set_variable = { which = invite_c_player value = -75 } }
+                if { limit = { opinion = { who = PREV value = -74 } }  set_variable = { which = invite_c_player value = -74 } }
+                if { limit = { opinion = { who = PREV value = -73 } }  set_variable = { which = invite_c_player value = -73 } }
+                if { limit = { opinion = { who = PREV value = -72 } }  set_variable = { which = invite_c_player value = -72 } }
+                if { limit = { opinion = { who = PREV value = -71 } }  set_variable = { which = invite_c_player value = -71 } }
+                if { limit = { opinion = { who = PREV value = -70 } }  set_variable = { which = invite_c_player value = -70 } }
+                if { limit = { opinion = { who = PREV value = -69 } }  set_variable = { which = invite_c_player value = -69 } }
+                if { limit = { opinion = { who = PREV value = -68 } }  set_variable = { which = invite_c_player value = -68 } }
+                if { limit = { opinion = { who = PREV value = -67 } }  set_variable = { which = invite_c_player value = -67 } }
+                if { limit = { opinion = { who = PREV value = -66 } }  set_variable = { which = invite_c_player value = -66 } }
+                if { limit = { opinion = { who = PREV value = -65 } }  set_variable = { which = invite_c_player value = -65 } }
+                if { limit = { opinion = { who = PREV value = -64 } }  set_variable = { which = invite_c_player value = -64 } }
+                if { limit = { opinion = { who = PREV value = -63 } }  set_variable = { which = invite_c_player value = -63 } }
+                if { limit = { opinion = { who = PREV value = -62 } }  set_variable = { which = invite_c_player value = -62 } }
+                if { limit = { opinion = { who = PREV value = -61 } }  set_variable = { which = invite_c_player value = -61 } }
+                if { limit = { opinion = { who = PREV value = -60 } }  set_variable = { which = invite_c_player value = -60 } }
+                if { limit = { opinion = { who = PREV value = -59 } }  set_variable = { which = invite_c_player value = -59 } }
+                if { limit = { opinion = { who = PREV value = -58 } }  set_variable = { which = invite_c_player value = -58 } }
+                if { limit = { opinion = { who = PREV value = -57 } }  set_variable = { which = invite_c_player value = -57 } }
+                if { limit = { opinion = { who = PREV value = -56 } }  set_variable = { which = invite_c_player value = -56 } }
+                if { limit = { opinion = { who = PREV value = -55 } }  set_variable = { which = invite_c_player value = -55 } }
+                if { limit = { opinion = { who = PREV value = -54 } }  set_variable = { which = invite_c_player value = -54 } }
+                if { limit = { opinion = { who = PREV value = -53 } }  set_variable = { which = invite_c_player value = -53 } }
+                if { limit = { opinion = { who = PREV value = -52 } }  set_variable = { which = invite_c_player value = -52 } }
+                if { limit = { opinion = { who = PREV value = -51 } }  set_variable = { which = invite_c_player value = -51 } }
+                if { limit = { opinion = { who = PREV value = -50 } }  set_variable = { which = invite_c_player value = -50 } }
+                if { limit = { opinion = { who = PREV value = -49 } }  set_variable = { which = invite_c_player value = -49 } }
+                if { limit = { opinion = { who = PREV value = -48 } }  set_variable = { which = invite_c_player value = -48 } }
+                if { limit = { opinion = { who = PREV value = -47 } }  set_variable = { which = invite_c_player value = -47 } }
+                if { limit = { opinion = { who = PREV value = -46 } }  set_variable = { which = invite_c_player value = -46 } }
+                if { limit = { opinion = { who = PREV value = -45 } }  set_variable = { which = invite_c_player value = -45 } }
+                if { limit = { opinion = { who = PREV value = -44 } }  set_variable = { which = invite_c_player value = -44 } }
+                if { limit = { opinion = { who = PREV value = -43 } }  set_variable = { which = invite_c_player value = -43 } }
+                if { limit = { opinion = { who = PREV value = -42 } }  set_variable = { which = invite_c_player value = -42 } }
+                if { limit = { opinion = { who = PREV value = -41 } }  set_variable = { which = invite_c_player value = -41 } }
+                if { limit = { opinion = { who = PREV value = -40 } }  set_variable = { which = invite_c_player value = -40 } }
+                if { limit = { opinion = { who = PREV value = -39 } }  set_variable = { which = invite_c_player value = -39 } }
+                if { limit = { opinion = { who = PREV value = -38 } }  set_variable = { which = invite_c_player value = -38 } }
+                if { limit = { opinion = { who = PREV value = -37 } }  set_variable = { which = invite_c_player value = -37 } }
+                if { limit = { opinion = { who = PREV value = -36 } }  set_variable = { which = invite_c_player value = -36 } }
+                if { limit = { opinion = { who = PREV value = -35 } }  set_variable = { which = invite_c_player value = -35 } }
+                if { limit = { opinion = { who = PREV value = -34 } }  set_variable = { which = invite_c_player value = -34 } }
+                if { limit = { opinion = { who = PREV value = -33 } }  set_variable = { which = invite_c_player value = -33 } }
+                if { limit = { opinion = { who = PREV value = -32 } }  set_variable = { which = invite_c_player value = -32 } }
+                if { limit = { opinion = { who = PREV value = -31 } }  set_variable = { which = invite_c_player value = -31 } }
+                if { limit = { opinion = { who = PREV value = -30 } }  set_variable = { which = invite_c_player value = -30 } }
+                if { limit = { opinion = { who = PREV value = -29 } }  set_variable = { which = invite_c_player value = -29 } }
+                if { limit = { opinion = { who = PREV value = -28 } }  set_variable = { which = invite_c_player value = -28 } }
+                if { limit = { opinion = { who = PREV value = -27 } }  set_variable = { which = invite_c_player value = -27 } }
+                if { limit = { opinion = { who = PREV value = -26 } }  set_variable = { which = invite_c_player value = -26 } }
+                if { limit = { opinion = { who = PREV value = -25 } }  set_variable = { which = invite_c_player value = -25 } }
+                if { limit = { opinion = { who = PREV value = -24 } }  set_variable = { which = invite_c_player value = -24 } }
+                if { limit = { opinion = { who = PREV value = -23 } }  set_variable = { which = invite_c_player value = -23 } }
+                if { limit = { opinion = { who = PREV value = -22 } }  set_variable = { which = invite_c_player value = -22 } }
+                if { limit = { opinion = { who = PREV value = -21 } }  set_variable = { which = invite_c_player value = -21 } }
+                if { limit = { opinion = { who = PREV value = -20 } }  set_variable = { which = invite_c_player value = -20 } }
+                if { limit = { opinion = { who = PREV value = -19 } }  set_variable = { which = invite_c_player value = -19 } }
+                if { limit = { opinion = { who = PREV value = -18 } }  set_variable = { which = invite_c_player value = -18 } }
+                if { limit = { opinion = { who = PREV value = -17 } }  set_variable = { which = invite_c_player value = -17 } }
+                if { limit = { opinion = { who = PREV value = -16 } }  set_variable = { which = invite_c_player value = -16 } }
+                if { limit = { opinion = { who = PREV value = -15 } }  set_variable = { which = invite_c_player value = -15 } }
+                if { limit = { opinion = { who = PREV value = -14 } }  set_variable = { which = invite_c_player value = -14 } }
+                if { limit = { opinion = { who = PREV value = -13 } }  set_variable = { which = invite_c_player value = -13 } }
+                if { limit = { opinion = { who = PREV value = -12 } }  set_variable = { which = invite_c_player value = -12 } }
+                if { limit = { opinion = { who = PREV value = -11 } }  set_variable = { which = invite_c_player value = -11 } }
+                if { limit = { opinion = { who = PREV value = -10 } }  set_variable = { which = invite_c_player value = -10 } }
+                if { limit = { opinion = { who = PREV value = -9 } }  set_variable = { which = invite_c_player value = -9 } }
+                if { limit = { opinion = { who = PREV value = -8 } }  set_variable = { which = invite_c_player value = -8 } }
+                if { limit = { opinion = { who = PREV value = -7 } }  set_variable = { which = invite_c_player value = -7 } }
+                if { limit = { opinion = { who = PREV value = -6 } }  set_variable = { which = invite_c_player value = -6 } }
+                if { limit = { opinion = { who = PREV value = -5 } }  set_variable = { which = invite_c_player value = -5 } }
+                if { limit = { opinion = { who = PREV value = -4 } }  set_variable = { which = invite_c_player value = -4 } }
+                if { limit = { opinion = { who = PREV value = -3 } }  set_variable = { which = invite_c_player value = -3 } }
+                if { limit = { opinion = { who = PREV value = -2 } }  set_variable = { which = invite_c_player value = -2 } }
+                if { limit = { opinion = { who = PREV value = -1 } }  set_variable = { which = invite_c_player value = -1 } }
+                if { limit = { opinion = { who = PREV value = 0 } }  set_variable = { which = invite_c_player value = 0 } }
+                if { limit = { opinion = { who = PREV value = 1 } }  set_variable = { which = invite_c_player value = 1 } }
+                if { limit = { opinion = { who = PREV value = 2 } }  set_variable = { which = invite_c_player value = 2 } }
+                if { limit = { opinion = { who = PREV value = 3 } }  set_variable = { which = invite_c_player value = 3 } }
+                if { limit = { opinion = { who = PREV value = 4 } }  set_variable = { which = invite_c_player value = 4 } }
+                if { limit = { opinion = { who = PREV value = 5 } }  set_variable = { which = invite_c_player value = 5 } }
+                if { limit = { opinion = { who = PREV value = 6 } }  set_variable = { which = invite_c_player value = 6 } }
+                if { limit = { opinion = { who = PREV value = 7 } }  set_variable = { which = invite_c_player value = 7 } }
+                if { limit = { opinion = { who = PREV value = 8 } }  set_variable = { which = invite_c_player value = 8 } }
+                if { limit = { opinion = { who = PREV value = 9 } }  set_variable = { which = invite_c_player value = 9 } }
+                if { limit = { opinion = { who = PREV value = 10 } }  set_variable = { which = invite_c_player value = 10 } }
+                if { limit = { opinion = { who = PREV value = 11 } }  set_variable = { which = invite_c_player value = 11 } }
+                if { limit = { opinion = { who = PREV value = 12 } }  set_variable = { which = invite_c_player value = 12 } }
+                if { limit = { opinion = { who = PREV value = 13 } }  set_variable = { which = invite_c_player value = 13 } }
+                if { limit = { opinion = { who = PREV value = 14 } }  set_variable = { which = invite_c_player value = 14 } }
+                if { limit = { opinion = { who = PREV value = 15 } }  set_variable = { which = invite_c_player value = 15 } }
+                if { limit = { opinion = { who = PREV value = 16 } }  set_variable = { which = invite_c_player value = 16 } }
+                if { limit = { opinion = { who = PREV value = 17 } }  set_variable = { which = invite_c_player value = 17 } }
+                if { limit = { opinion = { who = PREV value = 18 } }  set_variable = { which = invite_c_player value = 18 } }
+                if { limit = { opinion = { who = PREV value = 19 } }  set_variable = { which = invite_c_player value = 19 } }
+                if { limit = { opinion = { who = PREV value = 20 } }  set_variable = { which = invite_c_player value = 20 } }
+                if { limit = { opinion = { who = PREV value = 21 } }  set_variable = { which = invite_c_player value = 21 } }
+                if { limit = { opinion = { who = PREV value = 22 } }  set_variable = { which = invite_c_player value = 22 } }
+                if { limit = { opinion = { who = PREV value = 23 } }  set_variable = { which = invite_c_player value = 23 } }
+                if { limit = { opinion = { who = PREV value = 24 } }  set_variable = { which = invite_c_player value = 24 } }
+                if { limit = { opinion = { who = PREV value = 25 } }  set_variable = { which = invite_c_player value = 25 } }
+                if { limit = { opinion = { who = PREV value = 26 } }  set_variable = { which = invite_c_player value = 26 } }
+                if { limit = { opinion = { who = PREV value = 27 } }  set_variable = { which = invite_c_player value = 27 } }
+                if { limit = { opinion = { who = PREV value = 28 } }  set_variable = { which = invite_c_player value = 28 } }
+                if { limit = { opinion = { who = PREV value = 29 } }  set_variable = { which = invite_c_player value = 29 } }
+                if { limit = { opinion = { who = PREV value = 30 } }  set_variable = { which = invite_c_player value = 30 } }
+                if { limit = { opinion = { who = PREV value = 31 } }  set_variable = { which = invite_c_player value = 31 } }
+                if { limit = { opinion = { who = PREV value = 32 } }  set_variable = { which = invite_c_player value = 32 } }
+                if { limit = { opinion = { who = PREV value = 33 } }  set_variable = { which = invite_c_player value = 33 } }
+                if { limit = { opinion = { who = PREV value = 34 } }  set_variable = { which = invite_c_player value = 34 } }
+                if { limit = { opinion = { who = PREV value = 35 } }  set_variable = { which = invite_c_player value = 35 } }
+                if { limit = { opinion = { who = PREV value = 36 } }  set_variable = { which = invite_c_player value = 36 } }
+                if { limit = { opinion = { who = PREV value = 37 } }  set_variable = { which = invite_c_player value = 37 } }
+                if { limit = { opinion = { who = PREV value = 38 } }  set_variable = { which = invite_c_player value = 38 } }
+                if { limit = { opinion = { who = PREV value = 39 } }  set_variable = { which = invite_c_player value = 39 } }
+                if { limit = { opinion = { who = PREV value = 40 } }  set_variable = { which = invite_c_player value = 40 } }
+                if { limit = { opinion = { who = PREV value = 41 } }  set_variable = { which = invite_c_player value = 41 } }
+                if { limit = { opinion = { who = PREV value = 42 } }  set_variable = { which = invite_c_player value = 42 } }
+                if { limit = { opinion = { who = PREV value = 43 } }  set_variable = { which = invite_c_player value = 43 } }
+                if { limit = { opinion = { who = PREV value = 44 } }  set_variable = { which = invite_c_player value = 44 } }
+                if { limit = { opinion = { who = PREV value = 45 } }  set_variable = { which = invite_c_player value = 45 } }
+                if { limit = { opinion = { who = PREV value = 46 } }  set_variable = { which = invite_c_player value = 46 } }
+                if { limit = { opinion = { who = PREV value = 47 } }  set_variable = { which = invite_c_player value = 47 } }
+                if { limit = { opinion = { who = PREV value = 48 } }  set_variable = { which = invite_c_player value = 48 } }
+                if { limit = { opinion = { who = PREV value = 49 } }  set_variable = { which = invite_c_player value = 49 } }
+                if { limit = { opinion = { who = PREV value = 50 } }  set_variable = { which = invite_c_player value = 50 } }
+                if { limit = { opinion = { who = PREV value = 51 } }  set_variable = { which = invite_c_player value = 51 } }
+                if { limit = { opinion = { who = PREV value = 52 } }  set_variable = { which = invite_c_player value = 52 } }
+                if { limit = { opinion = { who = PREV value = 53 } }  set_variable = { which = invite_c_player value = 53 } }
+                if { limit = { opinion = { who = PREV value = 54 } }  set_variable = { which = invite_c_player value = 54 } }
+                if { limit = { opinion = { who = PREV value = 55 } }  set_variable = { which = invite_c_player value = 55 } }
+                if { limit = { opinion = { who = PREV value = 56 } }  set_variable = { which = invite_c_player value = 56 } }
+                if { limit = { opinion = { who = PREV value = 57 } }  set_variable = { which = invite_c_player value = 57 } }
+                if { limit = { opinion = { who = PREV value = 58 } }  set_variable = { which = invite_c_player value = 58 } }
+                if { limit = { opinion = { who = PREV value = 59 } }  set_variable = { which = invite_c_player value = 59 } }
+                if { limit = { opinion = { who = PREV value = 60 } }  set_variable = { which = invite_c_player value = 60 } }
+                if { limit = { opinion = { who = PREV value = 61 } }  set_variable = { which = invite_c_player value = 61 } }
+                if { limit = { opinion = { who = PREV value = 62 } }  set_variable = { which = invite_c_player value = 62 } }
+                if { limit = { opinion = { who = PREV value = 63 } }  set_variable = { which = invite_c_player value = 63 } }
+                if { limit = { opinion = { who = PREV value = 64 } }  set_variable = { which = invite_c_player value = 64 } }
+                if { limit = { opinion = { who = PREV value = 65 } }  set_variable = { which = invite_c_player value = 65 } }
+                if { limit = { opinion = { who = PREV value = 66 } }  set_variable = { which = invite_c_player value = 66 } }
+                if { limit = { opinion = { who = PREV value = 67 } }  set_variable = { which = invite_c_player value = 67 } }
+                if { limit = { opinion = { who = PREV value = 68 } }  set_variable = { which = invite_c_player value = 68 } }
+                if { limit = { opinion = { who = PREV value = 69 } }  set_variable = { which = invite_c_player value = 69 } }
+                if { limit = { opinion = { who = PREV value = 70 } }  set_variable = { which = invite_c_player value = 70 } }
+                if { limit = { opinion = { who = PREV value = 71 } }  set_variable = { which = invite_c_player value = 71 } }
+                if { limit = { opinion = { who = PREV value = 72 } }  set_variable = { which = invite_c_player value = 72 } }
+                if { limit = { opinion = { who = PREV value = 73 } }  set_variable = { which = invite_c_player value = 73 } }
+                if { limit = { opinion = { who = PREV value = 74 } }  set_variable = { which = invite_c_player value = 74 } }
+                if { limit = { opinion = { who = PREV value = 75 } }  set_variable = { which = invite_c_player value = 75 } }
+                if { limit = { opinion = { who = PREV value = 76 } }  set_variable = { which = invite_c_player value = 76 } }
+                if { limit = { opinion = { who = PREV value = 77 } }  set_variable = { which = invite_c_player value = 77 } }
+                if { limit = { opinion = { who = PREV value = 78 } }  set_variable = { which = invite_c_player value = 78 } }
+                if { limit = { opinion = { who = PREV value = 79 } }  set_variable = { which = invite_c_player value = 79 } }
+                if { limit = { opinion = { who = PREV value = 80 } }  set_variable = { which = invite_c_player value = 80 } }
+                if { limit = { opinion = { who = PREV value = 81 } }  set_variable = { which = invite_c_player value = 81 } }
+                if { limit = { opinion = { who = PREV value = 82 } }  set_variable = { which = invite_c_player value = 82 } }
+                if { limit = { opinion = { who = PREV value = 83 } }  set_variable = { which = invite_c_player value = 83 } }
+                if { limit = { opinion = { who = PREV value = 84 } }  set_variable = { which = invite_c_player value = 84 } }
+                if { limit = { opinion = { who = PREV value = 85 } }  set_variable = { which = invite_c_player value = 85 } }
+                if { limit = { opinion = { who = PREV value = 86 } }  set_variable = { which = invite_c_player value = 86 } }
+                if { limit = { opinion = { who = PREV value = 87 } }  set_variable = { which = invite_c_player value = 87 } }
+                if { limit = { opinion = { who = PREV value = 88 } }  set_variable = { which = invite_c_player value = 88 } }
+                if { limit = { opinion = { who = PREV value = 89 } }  set_variable = { which = invite_c_player value = 89 } }
+                if { limit = { opinion = { who = PREV value = 90 } }  set_variable = { which = invite_c_player value = 90 } }
+                if { limit = { opinion = { who = PREV value = 91 } }  set_variable = { which = invite_c_player value = 91 } }
+                if { limit = { opinion = { who = PREV value = 92 } }  set_variable = { which = invite_c_player value = 92 } }
+                if { limit = { opinion = { who = PREV value = 93 } }  set_variable = { which = invite_c_player value = 93 } }
+                if { limit = { opinion = { who = PREV value = 94 } }  set_variable = { which = invite_c_player value = 94 } }
+                if { limit = { opinion = { who = PREV value = 95 } }  set_variable = { which = invite_c_player value = 95 } }
+                if { limit = { opinion = { who = PREV value = 96 } }  set_variable = { which = invite_c_player value = 96 } }
+                if { limit = { opinion = { who = PREV value = 97 } }  set_variable = { which = invite_c_player value = 97 } }
+                if { limit = { opinion = { who = PREV value = 98 } }  set_variable = { which = invite_c_player value = 98 } }
+                if { limit = { opinion = { who = PREV value = 99 } }  set_variable = { which = invite_c_player value = 99 } }
+            }
+        }
+
+
+        set_variable = { which = invite_total  value = 0 }
+        change_variable = { which = invite_total  which = invite_c_liege }
+        change_variable = { which = invite_total  which = invite_c_player }
+
+        # 100 points if they claim a title from their liege's realm
+        # (I'm not sure how many points are actually from claim and how many are actually from removing "no reason to move".)
+        if = {
+            limit = {
+                is_female = no
+                liege = {
+                    ROOT = {
+                        any_claim = {
+                            OR = {
+                                holder = PREVPREV
+                                holder_scope = {
+                                    is_liege_or_above = PREVPREVPREV
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            change_variable = { which = invite_total  value = 100 }
+        }
+
+        # -50 points (???) if they claim a title from the inviter's realm
+        # (Actually depends on number of titles, whether it leaves a "no reason to move" cancelled out, relative realm power...)
+        #if = {
+        #    limit = {
+        #        is_female = no
+        #        any_playable_ruler = {
+        #            ai = no
+        #            ROOT = {
+        #                any_claim = {
+        #                    OR = {
+        #                        holder = PREVPREV
+        #                        holder_scope = {
+        #                            is_liege_or_above = PREVPREVPREV
+        #                        }
+        #                    }
+        #                }
+        #            }
+        #        }
+        #    }
+        #    change_variable = { which = invite_total  value = -50 }
+        #}
+
+        # Todo: wants to stay with lover
+        # Todo: inviter is lover
+        # Todo: friend
+        # Todo: close relative
+
+        # Will they accept?
+        if = {
+            limit = {
+                check_variable = { which = invite_total  value = 76 }
+            }
+            add_trait = accept_invite
+            break = yes
+        }
+
+        # Now try a bribe
+        # Todo: instead of assuming a bribe supplies 50 points, consider:
+        # state diplomacy, is_liege_or_above, ai_greed, already sent gift, already near max opinion
+        if = {
+            limit = {
+                check_variable = { which = invite_total  value = 26 }
+            }
+            add_trait = bribe_invite
+            break = yes
+        }
+
+        add_trait = reject_invite
+    }
+}

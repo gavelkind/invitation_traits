@@ -1,0 +1,17 @@
+accept_invite = {
+    customizer = no
+    random = no
+}
+
+bribe_invite = {
+    customizer = no
+    random = no
+}
+
+reject_invite = {
+    customizer = no
+    random = no
+}
+
+# Plus "cannot move"
+# Plus "out of diplomatic range" (although a general "in range" trait could be a separate mod)

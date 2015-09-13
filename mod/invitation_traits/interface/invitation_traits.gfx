@@ -1,0 +1,27 @@
+spriteTypes = {
+
+    spriteType = {
+        name = "GFX_trait_accept_invite"
+        texturefile = "gfx/traits/accept_invite.tga"
+        noOfFrames = 1
+        norefcount = yes
+        effectFile = "gfx/FX/buttonstate.lua"
+    }
+
+    spriteType = {
+        name = "GFX_trait_bribe_invite"
+        texturefile = "gfx/traits/bribe_invite.tga"
+        noOfFrames = 1
+        norefcount = yes
+        effectFile = "gfx/FX/buttonstate.lua"
+    }
+
+    spriteType = {
+        name = "GFX_trait_reject_invite"
+        texturefile = "gfx/traits/reject_invite.tga"
+        noOfFrames = 1
+        norefcount = yes
+        effectFile = "gfx/FX/buttonstate.lua"
+    }
+
+}

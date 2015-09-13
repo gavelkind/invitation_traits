@@ -1,0 +1,13 @@
+# Recompute traits for each character on startup and yearly
+
+on_startup = {
+    events = {
+        InvitationTraits.1
+    }
+}
+
+on_yearly_pulse = {
+    events = {
+        InvitationTraits.1
+    }
+}
