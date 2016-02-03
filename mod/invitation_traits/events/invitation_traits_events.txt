@@ -479,8 +479,8 @@ character_event = {
         change_variable = { which = invite_total  which = invite_c_liege }
         change_variable = { which = invite_total  which = invite_c_player }
 
-        # 100 points if they claim a title from their liege's realm
-        # (I'm not sure how many points are actually from claim and how many are actually from removing "no reason to move".)
+        # 70 points if they claim a title from their liege's realm
+        # (Actually +50 from the claim and -20 from removing "no reason to move")
         if = {
             limit = {
                 is_female = no
@@ -497,7 +497,7 @@ character_event = {
                     }
                 }
             }
-            change_variable = { which = invite_total  value = 100 }
+            change_variable = { which = invite_total  value = 70 }
         }
 
         # -50 points (???) if they claim a title from the inviter's realm
@@ -526,11 +526,12 @@ character_event = {
         # Todo: inviter is lover
         # Todo: friend
         # Todo: close relative
+        # Todo: previous liege is rival (AIREASON_LIEGE_HATE)
 
         # Will they accept?
         if = {
             limit = {
-                check_variable = { which = invite_total  value = 76 }
+                check_variable = { which = invite_total  value = 31 }   # (-10 base reluctance, -20 no reason to move)
             }
             add_trait = accept_invite
             break = yes
@@ -541,11 +542,13 @@ character_event = {
         # state diplomacy, is_liege_or_above, ai_greed, already sent gift, already near max opinion
         if = {
             limit = {
-                check_variable = { which = invite_total  value = 26 }
+                check_variable = { which = invite_total  value = -19 }
             }
             add_trait = bribe_invite
             break = yes
         }
+
+        # Perhaps: compute whether gift would get us high enough opinion to buy a favor (which may also depend on ai_greed)
 
         add_trait = reject_invite
     }
