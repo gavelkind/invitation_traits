@@ -12,14 +12,8 @@ decisions = {
                 text = "recompute_inivtation_traits_decision.tooltip"
             }
             hidden_tooltip = {
-                #any_realm_character = {
-                #    character_event = { id = InvitationTraits.1 }
-                #}
-
-                any_independent_ruler = {
-                    any_realm_character = {
-                        character_event = { id = InvitationTraits.1 }
-                    }
+                any_character = {
+                    character_event = { id = InvitationTraits.1 }
                 }
             }
         }
