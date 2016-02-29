@@ -27,9 +27,9 @@ character_event = {
                     # Cannot accept invitations
                     is_ruler = yes
                     prisoner = yes
-                    any_spouse = { is_ruler = yes }  # technically men married to female rulers can move, but i think this is a bug
-                    is_concubine = yes
-                    is_married_matrilineally = yes
+                    #any_spouse = { is_ruler = yes }  # in recent versions men married to female rulers can move, may be a bug
+                    is_consort = yes  # concubine
+                    is_married_matrilineally = yes   # technically men can move if matrilineal spouse is in another court
                     AND = { is_female = yes  is_married = yes }
                     is_abroad = yes
 
